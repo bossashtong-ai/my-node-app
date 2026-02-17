@@ -1,19 +1,18 @@
-const express = require('express');
-const cors = require('cors');
+const express = require("express");
+const cors = require("cors");
 const app = express();
-const PORT = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
 
-// Root route
-app.get('/', (req, res) => {
-  res.send('API is live!');
+app.post("/generate-banner", async (req, res) => {
+    const { description, projectName, ticker } = req.body;
+
+    if (!description) return res.status(400).json({ error: "Description required" });
+
+    // Example: return placeholder image
+    return res.json({ image: "https://via.placeholder.com/1500x500.png?text=AI+Banner" });
 });
 
-// API endpoint
-app.get('/api/data', (req, res) => {
-  res.json({ message: 'Hello from API!' });
-});
-
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(port, () => console.log(`Server running on port ${port}`));
